@@ -1,4 +1,5 @@
 import 'package:animation/model/model.dart';
+import 'package:animation/widget/details.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,7 +15,20 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     activities = [
       Activity(
-          name: "unknow", location: "kerala,india", imageUrl: "", price: 150)
+          name: "unknow",
+          location: "kerala,india",
+          imageUrl: "asset/ameer3.jpg",
+          price: 150),
+      Activity(
+          name: "unknow",
+          location: "mumbai,india",
+          imageUrl: "asset/ameer5.jpg",
+          price: 200),
+      Activity(
+          name: "unknow",
+          location: "chennai,india",
+          imageUrl: "asset/ameer10.jpg",
+          price: 250)
     ];
     super.initState();
   }
@@ -29,6 +43,7 @@ class _HomePageState extends State<HomePage> {
       body: Container(
         padding: EdgeInsets.all(20),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               "Pick Your \nFavorite Activity ",
@@ -39,8 +54,44 @@ class _HomePageState extends State<HomePage> {
             ),
             SizedBox(
               height: 20,
+            ),
+            Flexible(
+              child: ListView.builder(
+                itemCount: activities.length,
+                itemBuilder: (context, index) {
+                  Activity activity = activities[index];
+                  return buildCard(activity);
+                },
+              ),
             )
           ],
+        ),
+      ),
+    );
+  }
+
+  Card buildCard(Activity activity) {
+    return Card(
+      color: Colors.white,
+      child: Container(
+        height: 100,
+        child: Center(
+          child: ListTile(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => Details(activity: activity)));
+            },
+            leading: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.asset(
+                activity.imageUrl,
+                height: 100,
+              ),
+            ),
+            // trailing: ,
+          ),
         ),
       ),
     );
