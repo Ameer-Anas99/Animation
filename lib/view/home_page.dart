@@ -1,4 +1,5 @@
 import 'package:animation/model/model.dart';
+import 'package:animation/widget/apptext.dart';
 import 'package:animation/widget/details.dart';
 import 'package:flutter/material.dart';
 
@@ -90,7 +91,9 @@ class _HomePageState extends State<HomePage> {
                 height: 100,
               ),
             ),
-            // trailing: ,
+            trailing: AppText(data: activity.price.toString()),
+            title: Text(activity.name),
+            subtitle: Text(activity.location),
           ),
         ),
       ),
