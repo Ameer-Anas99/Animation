@@ -1,4 +1,5 @@
 import 'package:animation/model/model.dart';
+import 'package:animation/widget/fav_icon.dart';
 import 'package:flutter/material.dart';
 
 class Details extends StatelessWidget {
@@ -42,11 +43,11 @@ class Details extends StatelessWidget {
                   letterSpacing: 1,
                 ),
               ),
-              trailing: Text("data"),
+              trailing: FavoriteButton(),
             ),
             Padding(
               padding: EdgeInsets.all(20),
-              child: Text("a"),
+              child: Text("explain this ......"),
             )
           ],
         ),
