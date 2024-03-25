@@ -2,6 +2,7 @@ import 'package:animation/model/model.dart';
 import 'package:animation/widget/apptext.dart';
 import 'package:animation/widget/details.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -46,12 +47,24 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "Pick Your \nFavorite Activity ",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 28,
-                  fontWeight: FontWeight.w500),
+            TweenAnimationBuilder<double>(
+              tween: Tween<double>(begin: 0, end: 1),
+              duration: Duration(seconds: 3),
+              builder: (BuildContext context, double val, Widget? child) {
+                return Opacity(
+                  opacity: val,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: child,
+                  ),
+                );
+              },
+              child: AppText(
+                data: "Pick Your \nFavorite Activity ",
+                color: Colors.white,
+                size: 28,
+                fontWeight: FontWeight.w500,
+              ),
             ),
             SizedBox(
               height: 20,
