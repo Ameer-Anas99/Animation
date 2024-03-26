@@ -17,7 +17,8 @@ class Details extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            ClipRRect(
+            Hero(
+              tag: 'activity-img-${activity!.imageUrl}',
               child: Image.asset(
                 "${activity!.imageUrl}",
                 height: 400,
@@ -38,9 +39,7 @@ class Details extends StatelessWidget {
               ),
               subtitle: Text(
                 '\$${activity!.price} Only',
-                style: TextStyle(
-                  letterSpacing: 1,
-                ),
+                style: TextStyle(letterSpacing: 1, fontSize: 15),
               ),
               trailing: FavoriteButton(),
             ),

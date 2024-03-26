@@ -46,12 +46,12 @@ class _HomePageState extends State<HomePage> {
           children: [
             TweenAnimationBuilder<double>(
               tween: Tween<double>(begin: 0, end: 1),
-              duration: Duration(seconds: 3),
+              duration: Duration(seconds: 2),
               builder: (BuildContext context, double val, Widget? child) {
                 return Opacity(
                   opacity: val,
                   child: Padding(
-                    padding: EdgeInsets.only(top: val * 40),
+                    padding: EdgeInsets.only(top: val * 80),
                     child: child,
                   ),
                 );
@@ -96,14 +96,27 @@ class _HomePageState extends State<HomePage> {
             },
             leading: ClipRRect(
               borderRadius: BorderRadius.circular(10),
-              child: Image.asset(
-                activity.imageUrl,
-                height: 100,
+              child: Hero(
+                tag: 'activity-img-${activity.imageUrl}',
+                child: Image.asset(
+                  activity.imageUrl,
+                  height: 100,
+                ),
               ),
             ),
-            trailing: AppText(data: activity.price.toString()),
-            title: Text(activity.name),
-            subtitle: Text(activity.location),
+            trailing: AppText(
+              data: activity.price.toString(),
+              size: 18,
+            ),
+            title: AppText(
+              data: activity.name,
+              size: 20,
+            ),
+            subtitle: AppText(
+              data: activity.location,
+              size: 16,
+              color: Color.fromARGB(255, 74, 73, 73),
+            ),
           ),
         ),
       ),
