@@ -38,12 +38,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Center(child: Text("Home Page")),
-      ),
       backgroundColor: const Color.fromARGB(255, 68, 118, 143),
       body: Container(
-        padding: EdgeInsets.all(20),
+        padding: EdgeInsets.only(left: 22, right: 22),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -54,7 +51,7 @@ class _HomePageState extends State<HomePage> {
                 return Opacity(
                   opacity: val,
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: EdgeInsets.only(top: val * 40),
                     child: child,
                   ),
                 );
@@ -67,7 +64,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 10,
             ),
             Flexible(
               child: ListView.builder(
