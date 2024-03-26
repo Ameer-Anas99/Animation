@@ -30,7 +30,7 @@ class _IconButtonState extends State<IconButtonPage> {
                 return IconButton(
                   iconSize: size,
                   color: Colors.black,
-                  icon: child ?? Icon(Icons.access_alarm_outlined),
+                  icon: child!,
                   onPressed: () {
                     setState(() {
                       targetValue = targetValue == 80 ? 120 : 230;
@@ -38,6 +38,7 @@ class _IconButtonState extends State<IconButtonPage> {
                   },
                 );
               },
+              child: Icon(Icons.access_alarm_outlined),
             )
           ],
         ),
