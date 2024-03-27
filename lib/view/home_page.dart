@@ -17,19 +17,19 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     activities = [
       Activity(
-          name: "unknow",
-          location: "kerala,india",
-          imageUrl: "asset/ameer3.jpg",
+          name: "Mount Fuji",
+          location: "Mount Fuji, Japan",
+          imageUrl: "asset/mount fuji japan.jpg",
           price: 150),
       Activity(
-          name: "unknow",
-          location: "mumbai,india",
-          imageUrl: "asset/ameer5.jpg",
+          name: "Rome",
+          location: "Rome,Italy",
+          imageUrl: "asset/rome,italy.png",
           price: 200),
       Activity(
-          name: "unknow",
-          location: "chennai,india",
-          imageUrl: "asset/ameer10.jpg",
+          name: "Santorini",
+          location: "Santorini,Greece",
+          imageUrl: "asset/santorini,greece.jpg",
           price: 250)
     ];
     super.initState();
@@ -84,7 +84,7 @@ class _HomePageState extends State<HomePage> {
   Card buildCard(Activity activity) {
     return Card(
       color: Colors.white,
-      child: Container(
+      child: SizedBox(
         height: 100,
         child: Center(
           child: ListTile(
