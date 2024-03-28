@@ -44,7 +44,7 @@ class Details extends StatelessWidget {
                   '\$${activity!.price} Only',
                   style: TextStyle(letterSpacing: 1, fontSize: 15),
                 ),
-                trailing: FavoriteButton(),
+                trailing: FavButton(),
               ),
               Padding(
                 padding: EdgeInsets.all(20),

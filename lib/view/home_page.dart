@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
           name: "Santorini",
           location: "Santorini,Greece",
           imageUrl: "asset/santorini,greece.jpg",
-          price: 250)
+          price: 250),
     ];
     super.initState();
   }
