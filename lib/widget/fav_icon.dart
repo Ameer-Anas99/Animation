@@ -1,3 +1,4 @@
+import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -13,18 +14,20 @@ class _FavButtonState extends State<FavButton>
   AnimationController? _controller;
   Animation<Color?>? _colorAnimation;
   Animation<double?>? _sizeAnimation;
+  Animation<double>? _curve;
   bool isFav = false;
 
   @override
   void initState() {
-    _controller =
-        AnimationController(duration: Duration(milliseconds: 400), vsync: this);
+    _controller = AnimationController(
+        duration: Duration(milliseconds: 1200), vsync: this);
+    _curve = CurvedAnimation(parent: _controller!, curve: Curves.bounceOut);
     _colorAnimation =
         ColorTween(begin: Colors.grey, end: Colors.red).animate(_controller!);
     _sizeAnimation = TweenSequence(<TweenSequenceItem<double>>[
       TweenSequenceItem<double>(tween: Tween(begin: 40, end: 60), weight: 50),
-      TweenSequenceItem<double>(tween: Tween(begin: 60, end: 40), weight: 50)
-    ]).animate(_controller!);
+      TweenSequenceItem<double>(tween: Tween(begin: 60, end: 40), weight: 50),
+    ]).animate(_curve!);
 
     // _controller!.forward();
     _controller!.addListener(() {

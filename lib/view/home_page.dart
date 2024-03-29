@@ -2,7 +2,6 @@ import 'package:animation/model/model.dart';
 import 'package:animation/widget/apptext.dart';
 import 'package:animation/widget/details.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,10 +11,21 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<Activity> activities = [];
+  // List<Activity> activities = [];
+  List<Widget> activitiesList = [];
+  GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
+
   @override
   void initState() {
-    activities = [
+    super.initState();
+    // _addactivity();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      _addactivity();
+    });
+  }
+
+  void _addactivity() {
+    List<Activity> _activities = [
       Activity(
           name: "Mount Fuji",
           location: "Mount Fuji, Japan",
@@ -32,8 +42,19 @@ class _HomePageState extends State<HomePage> {
           imageUrl: "asset/santorini,greece.jpg",
           price: 250),
     ];
-    super.initState();
+
+    Future ftr = Future(() {});
+    _activities.forEach((Activity activity) {
+      ftr = ftr.then((value) {
+        return Future.delayed(Duration(milliseconds: 700), () {
+          activitiesList.add(buildCard(activity));
+          _listKey.currentState!.insertItem(activitiesList.length - 1);
+        });
+      });
+    });
   }
+
+  Tween<Offset> _offest = Tween(begin: Offset(1, 0), end: Offset(0, 0));
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +67,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             TweenAnimationBuilder<double>(
               tween: Tween<double>(begin: 0, end: 1),
+              curve: Curves.bounceOut,
               duration: Duration(seconds: 2),
               builder: (BuildContext context, double val, Widget? child) {
                 return Opacity(
@@ -66,12 +88,38 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: 10,
             ),
+            // Flexible(
+            //   child: ListView.builder(
+            //     itemCount: activities.length,
+            //     itemBuilder: (context, index) {
+            //       Activity activity = activities[index];
+            //       return buildCard(activity);
+            //     },
+            //   ),
+            // )
+            // Flexible(
+            //   child: AnimatedList(
+            //      key: _listKey,
+            //      initialItemCount: activitiesList.length,
+            //     itemBuilder: (context, index, animation) {
+            //       return SlideTransition(
+            //         position: );
+            //     },))
             Flexible(
-              child: ListView.builder(
-                itemCount: activities.length,
-                itemBuilder: (context, index) {
-                  Activity activity = activities[index];
-                  return buildCard(activity);
+              // child: ListView.builder(
+              //   itemCount: activitiesList.length,
+              //   itemBuilder: (context, index) {
+              //     return activitiesList[index];
+              //   },
+              // ),
+              child: AnimatedList(
+                key: _listKey,
+                initialItemCount: activitiesList.length,
+                itemBuilder: (context, index, animation) {
+                  return SlideTransition(
+                    position: animation.drive(_offest),
+                    child: activitiesList[index],
+                  );
                 },
               ),
             )
